@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  # MySQL 服务
+  mysql_gpt:
+    image: hncboy/chatgpt-web-java-mysql:latest
+    container_name: mysql_gpt
+    ports:
+    - 3306:3306
+
+#    ports:
+#      - 3309:3306
+#    volumes:
+#     - ~/mydata/mysql/data:/var/lib/mysql #数据文件挂载
+#     - C:Users/acer/mydata/mysql/conf:/etc/mysql/conf.d #配置文件挂载
+#     - ~/mydata/mysql/log:/var/log/mysql #日志文件挂载
+    networks:
+      gpt_network:
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping" , "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+  # Java 服务
+  java_gpt:
+    image: hncboy/chatgpt-web-java:latest
+    container_name: java_gpt
+    environment:
+      # 这里要用 mysql_gpt 的 3306 端口
+      - JDBC_URL=jdbc:mysql://116.62.170.71:3306/chat?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      - MYSQL_USER_NAME=root
+      - MYSQL_PASSWORD=123456
+      - CHAT_API_REVERSE_PROXY=https://chatgpt.ikechan8370.com/backend-api/conversation
+      - CHAT_OPENAI_ACCESS_TOKEN=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik1UaEVOVUpHTkVNMVFURTRNMEZCTWpkQ05UZzVNRFUxUlRVd1FVSkRNRU13UmtGRVFrRXpSZyJ9.eyJodHRwczovL2FwaS5vcGVuYWkuY29tL3Byb2ZpbGUiOnsiZW1haWwiOiJlNHFic2VtNGtxQGZpb25nZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZX0sImh0dHBzOi8vYXBpLm9wZW5haS5jb20vYXV0aCI6eyJ1c2VyX2lkIjoidXNlci1WN1owMGlIRk9GSEF5a1RrcE54NGRtaFAifSwiaXNzIjoiaHR0cHM6Ly9hdXRoMC5vcGVuYWkuY29tLyIsInN1YiI6ImF1dGgwfDYzOTcyNjAwNzljODgxZmE3OGZlYzZkNSIsImF1ZCI6WyJodHRwczovL2FwaS5vcGVuYWkuY29tL3YxIiwiaHR0cHM6Ly9vcGVuYWkub3BlbmFpLmF1dGgwYXBwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2ODcyNjkxOTIsImV4cCI6MTY4ODQ3ODc5MiwiYXpwIjoiVGRKSWNiZTE2V29USHROOTVueXl3aDVFNHlPbzZJdEciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIG1vZGVsLnJlYWQgbW9kZWwucmVxdWVzdCBvcmdhbml6YXRpb24ucmVhZCBvcmdhbml6YXRpb24ud3JpdGUifQ.tar5P52WTsthEVIlNxdxxz_XH7VKhK54Rjz4zCiid5hYOcnp6xVn9Se8ga9QpkVhMb2mSTolhBiuhJGiCUg2C4fg13Put2KCtuXNK5nT16dlNaby63tzDl7Ywz4bkmMIF4zPBO0u1_AxF2xsnQFEM23Xcp_StJn3QqVllMqlUOLYe-m-PNkONVxcreLS9Vx83FEjPgA9OElSuMRW7WpA1j0lHWhbpWot0driyYW3B1mSKmKBsCCYdoddt8vIpQslUftAtEVcMKZ9ZJfuuSEPSFHOvIFssA5s1NUigZmT2XPOZ5upYZCNMW67eozj9keXWBxZW_uivMU343INgxCJtw
+      - CHAT_OPENAI_API_BASE_URL=https://api.openai.com/
+      - CHAT_HTTP_PROXY_HOST:127.0.0.1
+      - EMAIL_HOST=smtp.qq.com
+      - EMAIL_PORT=465
+      - EMAIL_FROM=1456681838@qq.com
+      - mail.smtp.auth=true
+      - mail.smtp.starttls.enable=true
+      - mail.smtp.starttls.required=true
+      - EMAIL_USER=1456681838@qq.com
+      - EMAIL_PASS=
+      - EMAIL_VERIFY_REDIRECT_URL=http://116.62.170.71:1002/#/emailValidation?type=email&verifyCode=
+    ports:
+      - 3002:3002
+    depends_on:
+      - mysql_gpt
+    restart: on-failure
+    networks:
+      gpt_network:
+
+networks:
+  gpt_network:
+
