@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 /**
- * @author hncboy
- * @date 2023-4-1
+ * @author bukeyan
+ * @date 2023/08/01
  * 限流记录相关接口
  */
 @AllArgsConstructor

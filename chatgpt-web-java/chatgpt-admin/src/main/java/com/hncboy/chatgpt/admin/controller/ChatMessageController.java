@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import jakarta.annotation.Resource;
 
+
 /**
- * @author hncboy
- * @date 2023-3-27
- * 聊天记录相关接口
+ * 聊天信息控制器
+ * @author bukeyan
+ * @date 2023/07/31
  */
 @AllArgsConstructor
 @Tag(name = "管理端-聊天记录相关接口")

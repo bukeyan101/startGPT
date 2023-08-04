@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * @author hncboy
- * @date 2023-3-27
+ * @author bukeyan
+ * @date 2023/08/01
  * 聊天室相关接口
  */
 @AllArgsConstructor

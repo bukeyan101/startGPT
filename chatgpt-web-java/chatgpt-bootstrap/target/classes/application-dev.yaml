@@ -2,14 +2,17 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MYSQL_USER_NAME:root}
-    password: ${MYSQL_PASSWORD:123456}
+    password: ${MYSQL_PASSWORD:1234}
     url: ${JDBC_URL:jdbc:mysql://localhost:3306/chat?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true}
 
-#mybatis-plus:
-#  configuration:
+mybatis-plus:
+  configuration:
 #    # 控制台打印 SQL
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  # 日志级别
+  level:
+    root: debug
 chat:
   # OpenAI API Key - https://platform.openai.com/account/api-keys
   openai_api_key: ${CHAT_OPENAI_API_KEY:}
@@ -53,7 +56,7 @@ email:
   # 用户名
   user: ${EMAIL_USER:1456681838@qq.com}
   # 如果要授权码，这里就是传授权码
-  pass: ${EMAIL_PASS:}
+  pass: ${EMAIL_PASS:mrsjmwbczwroibgi}
   # 是否需要授权，决定是否要设置授权码
   auth: ${EMAIL_AUTH:true}
   # 邮箱验证码有效期（单位，分钟）

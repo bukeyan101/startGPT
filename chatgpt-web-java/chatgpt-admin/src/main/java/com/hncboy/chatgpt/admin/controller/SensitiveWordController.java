@@ -13,8 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * @author hncboy
- * @date 2023-3-28
+ * @author bukeyan
+ * @date 2023/08/01
  * 敏感词相关接口
  */
 @AllArgsConstructor

@@ -10,6 +10,7 @@
     <artifactId>chatgpt-bootstrap</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>com.hncboy</groupId>
             <artifactId>chatgpt-front</artifactId>
@@ -21,10 +22,12 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+
             <groupId>com.hncboy</groupId>
             <artifactId>chatgpt-base</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>
